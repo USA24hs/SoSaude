@@ -6,7 +6,6 @@
 <meta name="theme-color" content="#0f172a" id="themeColorMeta">
 <title>Check List de Plantão</title>
 
-<!-- Aplica o tema ANTES do primeiro render (evita flash) -->
 <script>
   (function(){
     try {
@@ -19,7 +18,6 @@
 </script>
 
 <style>
-  /* ===== TEMA ESCURO (padrão) ===== */
   :root{
     --bg:#0f172a;
     --card:#1e293b;
@@ -41,8 +39,6 @@
     --shadow:rgba(0,0,0,.35);
     --shadow-toast:rgba(0,0,0,.4);
   }
-
-  /* ===== TEMA CLARO ===== */
   :root[data-theme="light"]{
     --bg:#f1f5f9;
     --card:#ffffff;
@@ -81,7 +77,6 @@
   }
   .app{width:100%;max-width:520px}
 
-  /* ===== HEADER COM BOTÃO DE TEMA ===== */
   header{
     position:relative;
     text-align:center;
@@ -92,7 +87,7 @@
 
   .theme-toggle{
     position:absolute;
-    top:-6px;                 /* ← subiu 6px */
+    top:-6px;
     right:0;
     width:34px;
     height:34px;
@@ -116,7 +111,6 @@
   [data-theme="light"] .theme-toggle .icon-dark{display:none}
   [data-theme="light"] .theme-toggle .icon-light{display:inline}
 
-  /* ===== CARDS ===== */
   .card{
     background:var(--card);
     border:1px solid var(--linha);
@@ -166,7 +160,6 @@
     transition:color .3s ease;
   }
 
-  /* ===== DATA / HORA ===== */
   .datahora{
     display:flex;align-items:center;gap:10px;
     padding:10px 12px;
@@ -185,7 +178,6 @@
   }
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-  /* ===== PREVIEW ===== */
   .preview-head{
     display:flex;align-items:center;justify-content:space-between;
     margin-bottom:10px;
@@ -207,7 +199,6 @@
     transition:background-color .3s ease, border-color .3s ease, color .3s ease;
   }
 
-  /* ===== BOTÕES ===== */
   .acoes{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -216,7 +207,7 @@
   }
   .acoes2{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     gap:10px;
     margin-top:10px;
   }
@@ -233,8 +224,6 @@
   .btn-copiar:hover{filter:brightness(1.08)}
   .btn-whatsapp{background:var(--whatsapp);color:var(--whatsapp-fg)}
   .btn-whatsapp:hover{filter:brightness(1.08)}
-  .btn-camera{background:var(--azul);color:var(--azul-fg)}
-  .btn-camera:hover{filter:brightness(1.08)}
   .btn-salvar{background:#a855f7;color:#fff}
   .btn-salvar:hover{filter:brightness(1.08)}
   .btn-limpar{background:transparent;border-color:var(--linha);color:var(--txt2)}
@@ -250,7 +239,6 @@
   }
   .dica strong{color:var(--verde);transition:color .3s ease}
 
-  /* ===== HISTÓRICO ===== */
   .hist-head{
     display:flex;align-items:center;justify-content:space-between;
     margin-bottom:12px;
@@ -306,7 +294,6 @@
   }
   .hist-limpar-tudo:hover{color:var(--vermelho);border-color:var(--vermelho)}
 
-  /* ===== TOAST ===== */
   .toast{
     position:fixed;left:50%;bottom:24px;
     transform:translate(-50%,40px);
@@ -322,7 +309,7 @@
   .toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
 
   @media (max-width:380px){
-    .acoes,.acoes2{grid-template-columns:1fr;}
+    .acoes{grid-template-columns:1fr;}
     header h1{font-size:1.15rem;padding-right:42px;padding-left:42px}
   }
 </style>
@@ -417,11 +404,10 @@
     </div>
 
     <div class="acoes2">
-      <button class="btn-camera" id="btnCamera">📷 Tirar foto</button>
       <button class="btn-salvar" id="btnSalvar">💾 Salvar histórico</button>
     </div>
 
-    <div class="acoes2" style="grid-template-columns:1fr">
+    <div class="acoes2">
       <button class="btn-limpar" id="btnLimpar">🗑️ Limpar campos</button>
     </div>
   </div>
@@ -438,8 +424,6 @@
   </div>
 
 </div>
-
-<input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
 
 <div class="toast" id="toast">✅ Copiado!</div>
 
@@ -708,14 +692,6 @@
     setTimeout(() => mostrarToast('📎 Não esqueça de anexar a foto!', 'azul'), 500);
   }
 
-  /* ---------- Câmera ---------- */
-  $('cameraInput').addEventListener('change', (e) => {
-    const file = e.target.files && e.target.files[0];
-    if(!file) return;
-    mostrarToast('📷 Foto capturada! Anexe no WhatsApp.', 'azul');
-    e.target.value = '';
-  });
-
   /* ---------- Toast ---------- */
   let toastTimer;
   function mostrarToast(msg, cor){
@@ -746,7 +722,6 @@
   $('btnWhatsapp').addEventListener('click', compartilharWhatsapp);
   $('btnSalvar').addEventListener('click', () => salvarNoHistorico(false));
   $('btnLimparHist').addEventListener('click', limparHistorico);
-  $('btnCamera').addEventListener('click', () => $('cameraInput').click());
   $('themeToggle').addEventListener('click', toggleTema);
 
   $('btnLimpar').addEventListener('click', () => {
