@@ -207,7 +207,7 @@
   }
   .acoes2{
     display:grid;
-    grid-template-columns:1fr;
+    grid-template-columns:1fr 1fr;
     gap:10px;
     margin-top:10px;
   }
@@ -309,7 +309,7 @@
   .toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
 
   @media (max-width:380px){
-    .acoes{grid-template-columns:1fr;}
+    .acoes,.acoes2{grid-template-columns:1fr;}
     header h1{font-size:1.15rem;padding-right:42px;padding-left:42px}
   }
 </style>
@@ -405,9 +405,6 @@
 
     <div class="acoes2">
       <button class="btn-salvar" id="btnSalvar">💾 Salvar histórico</button>
-    </div>
-
-    <div class="acoes2">
       <button class="btn-limpar" id="btnLimpar">🗑️ Limpar campos</button>
     </div>
   </div>
